@@ -2,7 +2,7 @@
 
 
 ## Overview
-This project is a Machine Learning-based Customer Review Classifier built using Python, NLTK, Scikit-learn, and Streamlit.
+This project is a Machine Learning based Customer Review Classifier built using Python, NLTK, Scikit-learn, and Streamlit.
 It analyzes customer reviews and predicts whether they are Positive or Negative using Natural Language Processing (NLP).
 
 ## Features 🚀
