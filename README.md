@@ -64,9 +64,9 @@ View the prediction: Positive or Negative.
 You’re welcome to contribute!
 
 You can:
-Improve model accuracy
-Optimize preprocessing steps
-Enhance the Streamlit UI
+Improve model accuracy,
+Optimize preprocessing steps,
+Enhance the Streamlit UI.
 
 ## License 📜
 This project is licensed under the MIT License.
