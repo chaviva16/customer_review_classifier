@@ -4,17 +4,16 @@ import re
 import nltk
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
-from sklearn.feature_extraction.text import CountVectorizer
 
-# Ensure NLTK stopwords are available
+# Download stopwords to custom path
 nltk.download("stopwords", download_dir="nltk_data")
-nltk.data.path.append("nltk_data")  # Set custom directory for NLTK
+nltk.data.path.append("nltk_data")
 
-# Load trained model & vectorizer
+# Load model and vectorizer
 svm_model = joblib.load("svm_model.pkl")
 cv = joblib.load("vectorizer.pkl")
 
-# Initialize text preprocessing tools
+# Preprocessing tools
 ps = PorterStemmer()
 custom_stopwords = {
     'don', "don't", 'ain', 'aren', "aren't", 'couldn', "couldn't",
@@ -25,35 +24,31 @@ custom_stopwords = {
 }
 stop_words = set(stopwords.words("english")) - custom_stopwords
 
-# Text preprocessing function
+# Preprocessing function
 def preprocess_text(review_text):
-    review = re.sub('[^a-zA-Z]', ' ', review_text)  # Remove non-letters
-    review = review.lower()  # Convert to lowercase
-    review = review.split()  # Tokenize
-    review = [ps.stem(word) for word in review if word not in stop_words]  # Remove stopwords & stem words
-    review = " ".join(review)  # Rejoin words
-    
-    return cv.transform([review]).toarray()  # Convert processed text to numerical format
+    review = re.sub('[^a-zA-Z]', ' ', review_text)
+    review = review.lower().split()
+    review = [ps.stem(word) for word in review if word not in stop_words]
+    return cv.transform([" ".join(review)]).toarray()
 
-# Streamlit UI
-st.title("Customer Review Classifier")
-st.write("Enter a customer review below to predict whether it's Positive or Negative.")
-
-# User input
-review_input = st.text_area("Enter your review:")
-
-# Prediction function
-def predict_review(review_text):
-    processed_text = preprocess_text(review_text)  # Apply preprocessing
+# 🔁 Prediction logic (MUST come before it's called)
+def predict_review(text):
+    processed_text = preprocess_text(text)
     prediction = svm_model.predict(processed_text)
     return "Positive" if prediction[0] == 1 else "Negative"
 
-# Classify review button
-if st.button("Classify Review"):
-    if review_input.strip():
-        result = predict_review(review_input)
-        st.success(f"Prediction: **{result}**")
-    else:
-        st.warning("Please enter a review before classifying.")
+# Streamlit App UI
+st.set_page_config(page_title="Restaurant Review Classifier", layout="centered")
+st.title("🍽️ Restaurant Review Classifier")
+st.write("Enter a restaurant review to classify it as **Positive** or **Negative**.")
 
-# Run the app with: python -m streamlit run customer_review.py
+# Text input
+review_input = st.text_area("✍️ Write your review here:")
+
+# Prediction trigger
+if st.button("🚀 Classify Review"):
+    if review_input.strip():
+        result = predict_review(review_input.strip())
+        st.success(f"🎯 Prediction: **{result}**")
+    else:
+        st.warning("⚠️ Please enter a review before classifying.")
