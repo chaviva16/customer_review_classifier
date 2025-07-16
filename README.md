@@ -1,29 +1,48 @@
-## Customer Review Classifier 📝✨
+## 🍽️ Restaurant Review Sentiment Classifier
 
+This Streamlit app allows users to classify restaurant reviews as **Positive 😊** or **Negative 😞** using a machine learning model trained on 10,000+ labeled reviews.
 
-## Overview
-This project is a Machine Learning based Customer Review Classifier built using Python, NLTK, Scikit-learn, and Streamlit.
-It analyzes customer reviews and predicts whether they are Positive or Negative using Natural Language Processing (NLP).
+🔗 [Live App](https://customer-review-classifier.streamlit.app)
 
-## Features 🚀
-✅ Preprocesses customer reviews (tokenization, stopword removal, stemming)
+---
 
-✅ SVM model trained on CountVectorized data
+## 🚀 Features
 
-✅ Interactive Streamlit web app for user-friendly review classification
+- 📝 Enter any restaurant review and get instant sentiment prediction
+- 🧠 Model: Naive Bayes with TF-IDF vectorization
+- ⚡ Fast, lightweight, and easy to use
+- ✅ Clean UI
 
-✅ Fast and efficient machine learning text classifier
+---
 
-## Technologies Used 🛠
-Python – Data processing
+## 🧠 How It Works
 
-NLTK – Text preprocessing (stopwords, stemming, tokenization)
+1. Review text is preprocessed (cleaned, tokenized, stemmed)
+2. Text is transformed using **TF-IDF Vectorizer**
+3. A **Naive Bayes classifier** predicts whether the review is positive or negative
+4. Results are displayed in real time on the app
 
-Scikit-learn – Machine learning algorithms
+---
 
-Streamlit – Web interface
+## 📁 Files Included
 
-Joblib – Model and vectorizer serialization
+| File                      | Description                                      |
+|---------------------------|--------------------------------------------------|
+| `restaurant_review_app.py`| Streamlit app source code                        |
+| `naive_bayes_model.pkl`   | Trained Naive Bayes model (saved with joblib)    |
+| `tfidf_vectorizer.pkl`    | Fitted TF-IDF vectorizer                         |
+| `requirements.txt`        | Dependencies for running the app                 |
+
+---
+
+## 🧪 Example Inputs
+
+| Review                                             | Prediction |
+|----------------------------------------------------|------------ |
+| "The food was amazing and the service was great!"  |🟢 Positive  |
+| "Terrible service, the food was cold and bland."   | 🔴 Negative |
+
+---
 
 ## Installation 💻
 Step 1: Clone the Repository
